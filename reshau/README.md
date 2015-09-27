@@ -1,1 +1,0 @@
-# Python parser reshuege.ru
