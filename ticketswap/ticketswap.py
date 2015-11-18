@@ -49,6 +49,6 @@ class TicketswapScraper(object):
         self.driver.quit()
 
 if __name__ == '__main__':
-    settings = { 'username': 'sergey7@e-kirov.ru', 'password': 'stdex11', 'link' : 'http://click.ticketswap.nl/track/click/30039336/www.ticketswap.nl?p=eyJzIjoiY0x6N3NXYThpZ0VGTGVsNVJzRC16R2hGVGFBIiwidiI6MSwicCI6IntcInVcIjozMDAzOTMzNixcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL3d3dy50aWNrZXRzd2FwLm5sXFxcL2Rvd25sb2FkXFxcLzM2MTUyOFxcXC9jMTA5YmJjOWI4OGYzYTEyNTBjZDk3MTQyMmE2YWVkYVxcXC83NjQyNzFcIixcImlkXCI6XCIxNmE4NWI4Yzc5NmE0Y2UwOTk0Njc0M2RmM2MzODZkZlwiLFwidXJsX2lkc1wiOltcImQ4M2U3YmJmOTU3MTFkNDcyM2U4NjJlNTA1MWNjMWVhNTU5MDZlZjlcIl19In0' }
+    settings = { 'username': 'Email', 'password': 'PassWord', 'link' : 'http://click.ticketswap.nl/track/click/30039336/www.ticketswap.nl?p=eyJzIjoiY0x6N3NXYThpZ0VGTGVsNVJzRC16R2hGVGFBIiwidiI6MSwicCI6IntcInVcIjozMDAzOTMzNixcInZcIjoxLFwidXJsXCI6XCJodHRwczpcXFwvXFxcL3d3dy50aWNrZXRzd2FwLm5sXFxcL2Rvd25sb2FkXFxcLzM2MTUyOFxcXC9jMTA5YmJjOWI4OGYzYTEyNTBjZDk3MTQyMmE2YWVkYVxcXC83NjQyNzFcIixcImlkXCI6XCIxNmE4NWI4Yzc5NmE0Y2UwOTk0Njc0M2RmM2MzODZkZlwiLFwidXJsX2lkc1wiOltcImQ4M2U3YmJmOTU3MTFkNDcyM2U4NjJlNTA1MWNjMWVhNTU5MDZlZjlcIl19In0' }
     scraper = TicketswapScraper(settings)
     scraper.scrape()
