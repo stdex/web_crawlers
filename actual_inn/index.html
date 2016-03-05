@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    
+<script src="jquery.min.js" type="text/javascript"></script>
+
+<SCRIPT>
+    
+    /*
+    var i = 2311014546;
+    var args = {Value: String(i), IsValid: false};
+    ValidateInnCtrlNum(args);
+    if(args.IsValid == true) {
+            console.log(String(args.Value));
+    }
+    */
+
+    var i = 2300000000;
+    
+    function workLoop() {
+        
+        i += 1;
+        
+        var args = {Value: String(i), IsValid: false};
+        ValidateInnCtrlNum(args);
+        if(args.IsValid == true) {
+            $.ajax({
+                url: 'append_db.php?inn='+String(args.Value)
+            });
+            
+            setTimeout(workLoop, 0);
+        }
+        
+        workLoop();
+        
+    }   
+    
+    /*
+    for (var i = 2300000000; i <= 2399999999; i++) {
+        var args = {Value: String(i), IsValid: false};
+        ValidateInnCtrlNum(args);
+        if(args.IsValid == true) {
+            $.ajax({
+                url: 'append_db.php?inn='+String(args.Value)
+            });
+        }
+        setTimeout(console.log(args.Value), 1000);
+    }
+    */
+    
+    /*
+     проверка на контрольный разряд ИНН
+     */
+    function ValidateInnCtrlNum(args) {
+        var sInn = args.Value;
+        var nTaxPayerType;
+        var nA11 = 0, nA12 = 0;
+        var aW = new Array(10);
+        var sCtrlNum = "";
+        if (sInn.length == 10) nTaxPayerType = "1";
+        if (sInn.length == 12) nTaxPayerType = "2";
+        //ul
+        if (nTaxPayerType == "1") {
+            aW[0] = 31; aW[1] = 29; aW[2] = 23; aW[3] = 19;
+            aW[4] = 17; aW[5] = 13; aW[6] = 7; aW[7] = 5; aW[8] = 3;
+            for (var i = 0; i <= 8; i++) {
+                nA11 += Number(sInn.substr(i, 1)) * aW[i];
+            }
+            nA11 = 11 - nA11 % 11;
+            nA11 = (nA11 > 9) ? 0 : nA11;
+            nA11 = String(nA11);
+            if (sInn.substr(9, 1) == nA11) args.IsValid = true;
+            else args.IsValid = false;
+        }
+        //fl
+        if (nTaxPayerType == "2") {
+            aW[0] = 41; aW[1] = 37; aW[2] = 31; aW[3] = 29; aW[4] = 23;
+            aW[5] = 19; aW[6] = 17; aW[7] = 13; aW[8] = 7; aW[9] = 5; aW[10] = 3;
+            for (var i = 0; i <= 9; i++) {
+                nA11 += Number(sInn.substr(i, 1)) * aW[i + 1];
+                nA12 += Number(sInn.substr(i, 1)) * aW[i];
+            }
+            nA11 = 11 - nA11 % 11;
+            nA11 = (nA11 > 9) ? 0 : nA11;
+            nA12 = 11 - (nA12 + nA11 * aW[10]) % 11;
+            nA12 = (nA12 > 9) ? 0 : nA12;
+            if (sInn.substr(10, 2) == String(nA11) + String(nA12)) args.IsValid = true;
+            else args.IsValid = false;
+        }
+        return false;
+    }
+</SCRIPT>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+</head>
+
+<body onload="workLoop()">
+<div id="result">result goes here.</div>
+</body>
+</html>
